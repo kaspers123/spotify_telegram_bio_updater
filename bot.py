@@ -270,7 +270,7 @@ async def work(session: ClientSession):
             # TELEGRAM
             try:
                 # full needed, since we dont get a bio with the normal request
-                full = await client(GetFullUserRequest("me"))
+                full = (await client(GetFullUserRequest("me"))).full_user
                 bio = full.about
                 # to_insert means we have a successful playback
                 if to_insert:
