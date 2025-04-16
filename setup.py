@@ -76,7 +76,7 @@ async def setup(intro_printed: bool):
     if not constants.CLIENT_ID:
         constants.CLIENT_ID = input(
             "Now your Spotify Client ID is needed, you can get it from https://developer.spotify.com/dashboard/. "
-            "Make sure to add the Redirect URI http://localhost:1234/callback, otherwise you will see the error "
+            "Make sure to add the Redirect URI http://127.0.0.1:1234/callback, otherwise you will see the error "
             "INVALID_CLIENT: Invalid redirect URI. "
         )
         replace_lines.append(0)
@@ -90,7 +90,7 @@ async def setup(intro_printed: bool):
     if not constants.CLIENT_SECRET:
         constants.CLIENT_SECRET = input(
             "When you added the Spotify Client ID, you forgot to add the Client Secret.\n"
-            "Make sure that you set the Redirect URI http://localhost:1234/callback, otherwise you will see the error "
+            "Make sure that you set the Redirect URI http://127.0.0.1:1234/callback, otherwise you will see the error "
             "INVALID_CLIENT: Invalid redirect URI. "
         )
         replace_lines.append(1)
@@ -102,9 +102,9 @@ async def setup(intro_printed: bool):
             f"you have done that, you will be greeted by an Internal Server error, that is expected because the "
             f"local web server is killed immediately.\nJust return to this window for the next steps: "
             f"https://accounts.spotify.com/authorize?client_id={constants.CLIENT_ID}&response_type=code&"
-            "redirect_uri=http://localhost:1234/callback&scope=user-read-playback-state%20"
+            "redirect_uri=http://127.0.0.1:1234/callback&scope=user-read-playback-state%20"
             "user-read-currently-playing\nIf you see the INVALID_CLIENT: Invalid redirect URI, you need to set "
-            "http://localhost:1234/callback as an URI in your client, and restart this project (your config has been "
+            "http://127.0.0.1:1234/callback as an URI in your client, and restart this project (your config has been "
             "saved no worries)."
         )
         app = web.Application()
@@ -114,7 +114,7 @@ async def setup(intro_printed: bool):
         app["future"] = running
         app.add_routes([web.get("/callback", code_getter)])
         await runner.setup()
-        site = web.TCPSite(runner, host="localhost", port=1234)
+        site = web.TCPSite(runner, host="127.0.0.1", port=1234)
         await site.start()
         try:
             await running
@@ -125,7 +125,7 @@ async def setup(intro_printed: bool):
             "client_id": constants.CLIENT_ID,
             "client_secret": constants.CLIENT_SECRET,
             "grant_type": "authorization_code",
-            "redirect_uri": "http://localhost:1234/callback",
+            "redirect_uri": "http://127.0.0.1:1234/callback",
             "code": constants.INITIAL_TOKEN,
         }
         async with session.post(
