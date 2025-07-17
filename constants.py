@@ -1,9 +1,9 @@
-CLIENT_ID = "6ef4bae481c84a008e443550d57e46ab"
-CLIENT_SECRET = "d01e5791fc5e452ba6efaf5179a344b7"
-API_ID = 23088452
-API_HASH = "55fec9b16daef70243bc070886ffeb99"
+CLIENT_ID = ""
+CLIENT_SECRET = ""
+API_ID = 0
+API_HASH = ""
 INITIAL_TOKEN = ""
-INITIAL_BIO = "Mellan ett och noll"
+INITIAL_BIO = ""
 LOG = "me"
 # the escaping is necessary since we are testing against a regex pattern with it.
 SHUTDOWN_COMMAND = "\/\/stop"
